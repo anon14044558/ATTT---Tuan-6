@@ -1,0 +1,51 @@
+DES (Data Encryption Standard):
+
+Input: 64-bit plaintext message, 56-bit key.
+Output: 64-bit ciphertext message.
+3DES (Triple Data Encryption Standard):
+
+Input: 64-bit plaintext message, 168-bit key (using three 56-bit keys).
+Output: 64-bit ciphertext message.
+Mỗi khối DES và 3DES có các bước xử lý tương tự nhau, bao gồm:
+
+Bước 1: Permutation Initial (IP)
+Input: 64-bit plaintext message.
+Output: 64-bit message được hoán vị.
+Bước 2: 16 rounds of Feistel encryption
+Input: 32-bit left half và 32-bit right half của message và 48-bit subkey được tạo từ key.
+Output: 32-bit left half và 32-bit right half mới của message.
+Bước 3: Permutation Final (FP)
+Input: 32-bit left half và 32-bit right half mới của message.
+Output: 64-bit message được hoán vị.
+
+
+Ví dụ về input/output cho mỗi bước của khối DES:
+
+Bước 1 (IP):
+Input: 0110111001101111011011000110011101101100011010010110001101101111 (64-bit plaintext message)
+Output: 1100110000000000110011001111111111110000101010101111000010101010 (64-bit message được hoán vị)
+Bước 2 (Feistel encryption):
+Input: 01101110011011110110110001100111 (32-bit left half), 01101100011001010110001101101111 (32-bit right half), 101010101010101010101010101010101010101010101010 (48-bit subkey)
+Output: 11001100011101111101010111011001 (32-bit left half mới), 01101010100110100000101101111101 (32-bit right half mới)
+Bước 3 (FP):
+Input: 11001100011101111101010111011001 (32-bit left half mới), 01101010100110100000101101111101 (32-bit right half mới)
+Output: 1000010111101000010101011100110011001111111111001100110111100011 (64-bit ciphertext message)
+
+
+Ví dụ về input/output cho mỗi bước của khối 3DES:
+
+Bước 1 (IP):
+Input: 0110111001101111011011000110011101101100011010010110001101101111 (64-bit plaintext message)
+Output: 1100110000000000110011001111111111110000101010101111000010101010 (64-bit message được hoán vị)
+Bước 2 (Feistel encryption):
+Input: 01101110011011110110110001100111 (32-bit left half), 01101100011001010110001101101111 (32-bit right half), 101010101010101010101010101010101010101010101010 (48-bit subkey1)
+Output: 11001100011101111101010111011001 (32-bit left half mới), 01101010100110100000101101111101 (32-bit right half mới)
+Bước 3 (Feistel encryption):
+Input: 01101010100110100000101101111101 (32-bit left half), 11001100011101111101010111011001 (32-bit right half), 010101010101010101010101010101010101010101010101 (48-bit subkey2)
+Output: 11011011010001000111110111000111 (32-bit left half mới), 10011110111100111011010110001100 (32-bit right half mới)
+Bước 4 (Feistel encryption):
+Input: 11011011010001000111110111000111 (32-bit left half), 10011110111100111011010110001100 (32-bit right half), 111111111111111111111111111111111111111111111111 (48-bit subkey3)
+Output: 01101010100110100000101101111101 (32-bit left half mới), 11001100011101111101010111011001 (32-bit right half mới)
+Bước 5 (FP):
+Input: 01101010100110100000101101111101 (32-bit left half mới), 11001100011101111101010111011001 (32-bit right half mới)
+Output: 1110101111111101000111110110100010100011101101001110111111001010 (64-bit ciphertext message)
